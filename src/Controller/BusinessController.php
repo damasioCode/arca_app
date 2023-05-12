@@ -14,8 +14,14 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class BusinessController extends AbstractController
 {
-    #[Route('/admin', name: 'app_business_index', methods: ['GET'])]
+    #[Route('/', name: 'app_business_front_page', methods: ['GET'])]
     public function index(BusinessRepository $businessRepository): Response
+    {
+        return $this->render('business/front_page.html.twig');
+    }
+
+    #[Route('/admin', name: 'app_business_index', methods: ['GET'])]
+    public function admin(BusinessRepository $businessRepository): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
 
@@ -23,6 +29,7 @@ class BusinessController extends AbstractController
             'businesses' => $businessRepository->findAll(),
         ]);
     }
+
 
     #[Route('/new', name: 'app_business_new', methods: ['GET', 'POST'])]
     public function new(Request $request, BusinessRepository $businessRepository): Response
