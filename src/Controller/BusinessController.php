@@ -5,15 +5,16 @@ namespace App\Controller;
 use App\Entity\Business;
 use App\Form\BusinessType;
 use App\Repository\BusinessRepository;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/business')]
+
 class BusinessController extends AbstractController
 {
-    #[Route('/', name: 'app_business_index', methods: ['GET'])]
+    #[Route('/admin', name: 'app_business_index', methods: ['GET'])]
     public function index(BusinessRepository $businessRepository): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
@@ -26,6 +27,8 @@ class BusinessController extends AbstractController
     #[Route('/new', name: 'app_business_new', methods: ['GET', 'POST'])]
     public function new(Request $request, BusinessRepository $businessRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         $business = new Business();
         $form = $this->createForm(BusinessType::class, $business);
         $form->handleRequest($request);
@@ -53,6 +56,8 @@ class BusinessController extends AbstractController
     #[Route('/{id}/edit', name: 'app_business_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Business $business, BusinessRepository $businessRepository): Response
     {
+
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $form = $this->createForm(BusinessType::class, $business);
         $form->handleRequest($request);
 
