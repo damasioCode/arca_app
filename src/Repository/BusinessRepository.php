@@ -39,10 +39,14 @@ class BusinessRepository extends ServiceEntityRepository
         }
     }
 
-    public function findBusinessByLikeTitle($title) {
+    public function findBusinessByLikeTerm($searchTerm) {
         return $this->createQueryBuilder('business')
-            ->where('business.title LIKE :title')
-            ->setParameter('title', '%'.$title.'%')
+            ->leftJoin('business.category', 'category')
+            ->where('business.title LIKE :searchTerm')
+            ->orWhere('business.address LIKE :searchTerm')
+            ->orWhere('business.city LIKE :searchTerm')
+            ->orWhere('category.name LIKE :searchTerm')
+            ->setParameter('searchTerm', '%'.$searchTerm.'%')
             ->getQuery();
     }
 

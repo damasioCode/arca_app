@@ -27,7 +27,7 @@ class HomeController extends AbstractController
             ]);
         }
 
-        $business = $businessRepository->findBusinessByLikeTitle($searchRequest);
+        $business = $businessRepository->findBusinessByLikeTerm($searchRequest);
         
         $itemsPerPage = 10;
         $businessIndex = ( $pageRequest - 1 ) * $itemsPerPage;
