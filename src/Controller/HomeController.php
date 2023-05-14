@@ -28,8 +28,8 @@ class HomeController extends AbstractController
         }
 
         $business = $businessRepository->findBusinessByLikeTitle($searchRequest);
+        
         $itemsPerPage = 10;
-
         $businessIndex = ( $pageRequest - 1 ) * $itemsPerPage;
 
         $paginateBusiness = $paginator->paginate(
@@ -42,7 +42,7 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
             'search_query' => $searchRequest,
             'businesses' => $paginateBusiness,
-            'business_index' => $businessIndex
+            'business_index' => $businessIndex,
         ]);
     }
 }

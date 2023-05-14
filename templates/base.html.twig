@@ -34,7 +34,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                <a class="navbar-brand" href="#">Arca App</a>
+                <a class="navbar-brand" href="{{ path('app_home') }}">Arca App</a>
 
                 {% if is_granted('ROLE_USER') %}
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -49,10 +49,17 @@
                     </li>
                 </ul>
 
-                <div class="mr-auto navbar-nav">
+                <div class="ml-auto navbar-nav">
                     <a class="nav-link" href="{{ path('app_logout') }}">Logout </a>
                 </div>
                 {% endif %}
+                {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                <div class="navbar-nav me-auto mb-2 mb-lg-0"></div>
+                <div class="ml-auto navbar-nav">
+                    <a class="nav-link" href="{{ path('app_login') }}">Login </a>
+                </div>
+                {% endif %}
+                
             </div>
         </div>
     </nav>

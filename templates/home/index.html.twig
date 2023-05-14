@@ -12,10 +12,11 @@
         class="d-flex mt-4 justify-content-between align-items-center w-100"
         style="max-width: 500px"    
     >
-        <form class="w-100 mt-4" method="GET" action="{{ path('app_business_delete', {'id': 1}) }}">
+        <form class="w-100 mt-4" method="GET" action="{{ path('app_home') }}">
             <input 
                 type="text"
                 class="form-control text-center"
+                name="q"
                 placeholder="What are you looking for?"    
             >
 
