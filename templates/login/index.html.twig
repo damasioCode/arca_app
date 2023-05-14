@@ -37,15 +37,17 @@
             {% if error %}
                 <div class="mb-3" style="color: #dc3545">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
-
+            
             <button type="submit" class="btn btn-primary">Login</button>
-            <a 
-                type="submit" 
-                class="btn btn-success" 
-                href="{{ path('app_register') }}"
-            >
-            Register
-            </button>
+            <!--
+                <a 
+                    type="submit" 
+                    class="btn btn-success" 
+                    href="{{ path('app_register') }}"
+                >
+                Register
+                </a>
+            -->
         </form>
     <div>
 {% endblock %}

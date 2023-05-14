@@ -14,9 +14,10 @@
         <div class="mt-4">
             <h3>
                 <a href="#">
-                {{ loop.index + business_index }}. {{ business.title }}
+                {{ loop.index + business_index }}. {{ business.title }} {{ business.slug }}
                 </a>
             </h3>
+            
             <p>
             {% if business.category|length == 1 %}
                 in {{business.category|first.name}}
