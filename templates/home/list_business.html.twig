@@ -9,7 +9,11 @@
 </div>
 <div class="container">
     <!-- Content here -->
-    <h2 class="mt-3">Results for "{{search_query}}"</h2>
+    {% if businesses|length > 1 %}
+        <h2 class="mt-3">Results for "{{search_query}}"</h2>
+    {% else %}
+        <h2 class="mt-3">No results for "{{search_query}}"</h2>
+    {% endif %}
     {% for business in businesses %}
         <div class="mt-4">
             <h3>
@@ -37,7 +41,6 @@
         </div>
     {% endfor %}
 
-    {{businesses.getTotalItemCount()}}
     <nav class="d-flex justify-content-center mt-4 mb-4">
         <ul class="pagination">
             <li class="page-item"><a class="page-link" href="#">Previous</a></li>

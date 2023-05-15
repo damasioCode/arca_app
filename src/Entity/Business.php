@@ -8,9 +8,11 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\String\Slugger\SluggerInterface;
+
 
 #[ORM\Entity(repositoryClass: BusinessRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Business
 {
     #[ORM\Id]
@@ -20,10 +22,6 @@ class Business
 
     #[ORM\Column(length: 255)]
     private ?string $title = null;
-
-    #[Gedmo\Slug(fields: ["title"])]
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $slug = null;
 
     #[ORM\Column(length: 20)]
     private ?string $phone = null;
@@ -45,6 +43,10 @@ class Business
 
     #[ORM\ManyToMany(targetEntity: Category::class)]
     private Collection $category;
+
+    #[Gedmo\Slug(fields: ["title"])]
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $slug = null;
 
     public function __construct()
     {
@@ -164,25 +166,43 @@ class Business
         return $this;
     }
 
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
+    public function prePersist(): void
+    {
+        // $slugify = new Slugify();
+        // $this->slug = $slugify->slugify($this->title);
+         // Preencher o campo slug automaticamente antes de salvar
+         $slug = $this->slugify($this->title);
+         $this->slug = $slug;
+    }
+
     public function getSlug(): ?string
     {
         return $this->slug;
     }
 
-    public function setSlug(?string $slug): self
+    public function setSlug(string $slug): self
     {
         $this->slug = $slug;
 
         return $this;
     }
 
-    /**
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
-     */
-    public function generateSlug(): void
+    public function slugify(string $text): string
     {
-        $slugify = new Slugify();
-        $this->slug = $slugify->slugify($this->title);
+        // Replace for underline
+        $text = preg_replace('/[^a-zA-Z0-9\-]/', '_', $text);
+    
+        // Remove multiples underlines
+        $text = preg_replace('/_+/', '_', $text);
+    
+        // Remove underlines in begin or end
+        $text = trim($text, '_');
+    
+        // Convert to LowerCase
+        $text = strtolower($text);
+    
+        return $text;
     }
 }

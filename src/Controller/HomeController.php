@@ -45,4 +45,33 @@ class HomeController extends AbstractController
             'business_index' => $businessIndex,
         ]);
     }
+
+    #[Route('/{slug}', name: 'app_home')]
+    public function detail(BusinessRepository $businessRepository, PaginatorInterface $paginator, Request $request): Response
+    {
+
+        if(!$searchRequest){
+            return $this->render('home/index.html.twig', [
+                'controller_name' => 'HomeController',
+            ]);
+        }
+
+        $business = $businessRepository->findBusinessByLikeTerm($searchRequest);
+        
+        $itemsPerPage = 10;
+        $businessIndex = ( $pageRequest - 1 ) * $itemsPerPage;
+
+        $paginateBusiness = $paginator->paginate(
+            $business->getResult(),
+            $pageRequest,
+            $itemsPerPage
+        ); 
+
+        return $this->render('home/list_business.html.twig', [
+            'controller_name' => 'HomeController',
+            'search_query' => $searchRequest,
+            'businesses' => $paginateBusiness,
+            'business_index' => $businessIndex,
+        ]);
+    }
 }
