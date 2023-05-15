@@ -22,3 +22,8 @@ Por padrão existe o usuário mestre:
 
 #### email: admin@gmail.com
 #### password: admin123
+
+Para encerrar o projeto executar o comando:
+```bash
+  make stop
+```
