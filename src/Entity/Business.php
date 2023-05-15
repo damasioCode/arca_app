@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use Gedmo\Mapping\Annotation as Gedmo;
+
 #[ORM\Entity(repositoryClass: BusinessRepository::class)]
 class Business
 {
@@ -19,6 +21,7 @@ class Business
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
+    #[Gedmo\Slug(fields: ["title"])]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $slug = null;
 
@@ -171,5 +174,15 @@ class Business
         $this->slug = $slug;
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function generateSlug(): void
+    {
+        $slugify = new Slugify();
+        $this->slug = $slugify->slugify($this->title);
     }
 }

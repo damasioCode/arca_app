@@ -23,6 +23,10 @@ services:
     App\DataFixtures\UserFixtures:
         arguments:
             - '@security.password_hasher'
+    
+    App\Controller\UserController:
+        arguments:
+            - '@security.password_hasher'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

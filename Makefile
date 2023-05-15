@@ -19,4 +19,4 @@ migrate: start
 seed: start
 	docker exec -it arca_app php bin/console doctrine:fixtures:load --no-interaction
 
-startup: build migrate seed
+startup: build migrate seed stop

@@ -15,6 +15,7 @@ class BusinessType extends AbstractType
     {
         $builder
             ->add('title')
+            ->add('slug')
             ->add('phone')
             ->add('address')
             ->add('cep')
