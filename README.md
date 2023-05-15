@@ -7,7 +7,7 @@ Arca APP é uma listagem de empresas de com informações relevantes ao úsuario
 Para realizar o setup do projeto deve utilizar o comando:
 
 ```bash
-  make setup
+  make startup
 ```
 
 Em seguida executar o proximo comando para iniciar o projeto:
