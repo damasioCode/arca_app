@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}List Business{% endblock %}
 
 {% block body %}
 <div class="container d-flex flex-column align-items-center w-100">
@@ -17,7 +17,7 @@
     {% for business in businesses %}
         <div class="mt-4">
             <h3>
-                <a href="/{{ business.slug }}">
+                <a href="/home/{{ business.slug }}">
                 {{ loop.index + business_index }}. {{ business.title }}
                 </a>
             </h3>

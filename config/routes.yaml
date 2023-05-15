@@ -6,7 +6,7 @@ app_logout:
     path: /logout
     methods: GET
 
-# app_front_page:
-#     controller: App\Controller\BusinessController::frontPage
-#     path: /
-#     methods: GET
+app_user_index:
+    controller: App\Controller\UserController::index
+    path: /user
+    methods: GET

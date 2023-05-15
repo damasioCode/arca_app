@@ -46,7 +46,7 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/{slug}', name: 'app_home_detail')]
+    #[Route('/home/{slug}', name: 'app_home_details')]
     public function detail(string $slug, Request $request, BusinessRepository $businessRepository): Response
     {
         $detail = $businessRepository->findOneBy(['slug' => $slug]);
