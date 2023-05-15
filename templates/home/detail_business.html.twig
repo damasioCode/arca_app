@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Business{% endblock %}
+
+{% block body %}
+    <h1>Business</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ business.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ business.title }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ business.phone }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ business.address }}</td>
+            </tr>
+            <tr>
+                <th>Cep</th>
+                <td>{{ business.cep }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ business.city }}</td>
+            </tr>
+            <tr>
+                <th>State</th>
+                <td>{{ business.state }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ business.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}
